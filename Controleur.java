@@ -1,32 +1,17 @@
 public class Controleur
 {
-	private IHM ihm ;
-	private Metier metier;
+	private Metier   metier;
+	private FenPrincipale  ihm;
 
-	public Controleur()
+	public Controleur (String[] tabNom)
 	{
-		this.ihm    = new IHM(this) ;
-		this.metier = new Metier(this);
-		//boucle de jeu
-		do
-		{
-			this.metier.jouer();
-		}
-		while(this.metier.getEnd());
+		this.metier = new Metier(this, tabNom);
+		this.ihm    = new FenPrincipale(this);
 	}
 
-	public static void main(String[] agrs)
-	{
-		new Controleur();
-	}
-	
-	//--------------------------------------------------------------
-	//                            LIEN SCANNER
-	public int    nombreDeJoueur () { return 2 ;      }
-	public String creeJoueur     () { return "teste ";}
+	public Pion   getPion   () { return this.metier.getPion ();      }
+	public String getFond   () { return "plateau2-4.jpg"; }
+	public String getStringRobot() {return "grosRobotRouge.png";}
 
-	//--------------------------------------------------------------
-	//                             GET
-	public IHM    getIhm()    { return this.ihm ;  }
-	public Metier getMetier() { return this.metier;}
+	public Metier getMetier(){return this.metier;}
 }
