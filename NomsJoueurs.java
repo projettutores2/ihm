@@ -1,3 +1,4 @@
+package TwinTinBots.ihm;
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.event.*;
@@ -10,8 +11,8 @@ public class NomsJoueurs extends JDialog implements ActionListener
 	private JTextField[] listJtf;
 	private JPanel panCentre,panBas;
 	private JButton bOk, bCancel;
-	private Menu menu;
-	public NomsJoueurs(int taille, Menu m)
+	private Launcher menu;
+	public NomsJoueurs(int taille, Launcher m)
 	{
 		this.setSize(300,taille*50+20);
 		this.setUndecorated(true);

@@ -1,3 +1,4 @@
+package TwinTinBots.ihm;
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.event.*;
@@ -10,9 +11,9 @@ public class PanelMenu extends JPanel implements ActionListener
 {
 	private JButton bLancerPartie;
 	private JButton bQuitter;
-	private Menu menu;
+	private Launcher menu;
 	
-	public PanelMenu(Menu m)
+	public PanelMenu(Launcher m)
 	{
 		SpringLayout panelGlobal = new SpringLayout();
 		this.setLayout(panelGlobal);

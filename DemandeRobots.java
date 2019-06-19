@@ -1,3 +1,4 @@
+package TwinTinBots.ihm;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -32,6 +33,7 @@ public class DemandeRobots extends JDialog implements ActionListener
 
 		this.boutonValider = new JButton("Modifier ce robot");
 		this.boutonValider.addActionListener(this);
+		Apparence.setStyleBtn(this.boutonValider);
 
 		this.setLayout(new BorderLayout(0,10));
 		this.add(this.listeRobots,   BorderLayout.CENTER);

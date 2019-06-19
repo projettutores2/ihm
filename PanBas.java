@@ -1,3 +1,4 @@
+package TwinTinBots.ihm;
 import java.awt.*;
 import javax.swing.*;
 

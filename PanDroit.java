@@ -1,3 +1,4 @@
+package TwinTinBots.ihm;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -24,7 +25,7 @@ public class PanDroit extends JPanel implements ActionListener
 		Apparence.setStyleLbl(this.labTour);
 		this.labJoueur = new JLabel("Joueur en cours : "+this.ctrl.getMetier().getJoueurActif());
 		Apparence.setStyleLbl(this.labJoueur);
-		this.tabNomBoutons = new String[]{"Modifier Robot", "Ex\u00e9cuter Programme", "Passer Tour"};
+		this.tabNomBoutons = new String[]{"Modifier Robot", "Ex\u00e9cuter Programme"};
 		this.tabJButt      = new JButton[this.tabNomBoutons.length];
 		for (int i=0; i<this.tabNomBoutons.length; i++)
 		{
@@ -61,11 +62,7 @@ public class PanDroit extends JPanel implements ActionListener
 		{
 
 		}
-		else if (e.getSource() == this.tabJButt[2])
-		{
-			this.ctrl.getMetier().passerTour();
-			this.majPanel();
-		}
+
 	}
 
 	public void majPanel()

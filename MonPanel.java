@@ -1,3 +1,5 @@
+package TwinTinBots.ihm;
+import TwinTinBots.metier.Pion;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.lang.Object;
@@ -28,17 +30,17 @@ public class MonPanel extends JPanel
 
 		// Ajout de l'image du fond
 		
-		Image img = new ImageIcon(new ImageIcon(this.ctrl.getFond()).getImage().getScaledInstance(HAUTEUR, LARGEUR, Image.SCALE_DEFAULT)).getImage();
+		Image img = new ImageIcon(new ImageIcon("TwinTinBots/img/plateau2-4.jpg").getImage().getScaledInstance(HAUTEUR, LARGEUR, Image.SCALE_DEFAULT)).getImage();
 		Pion p;
 
 		//pion représenté par une image :
-		Image imgRobot = new ImageIcon(new ImageIcon(this.ctrl.getStringRobot()).getImage().getScaledInstance(57, 60, Image.SCALE_DEFAULT)).getImage();
+		Image imgRobot = new ImageIcon(new ImageIcon("TwinTinBots/grosRobot0.png").getImage().getScaledInstance(57, 60, Image.SCALE_DEFAULT)).getImage();
 
 
 		g2.drawImage ( img, 0,0, this );
 
 
-		p =  ctrl.getPion();
+		p =  this.ctrl.getRobotsCourants()[0];
 
 		//Pour dessiner un pion
 		/*if ( p != null )
@@ -51,7 +53,7 @@ public class MonPanel extends JPanel
 		if (p != null)
 		{
 			AffineTransform rotation = new AffineTransform();
-			rotation.translate(p.getX() + 472, p.getY() + 85);
+			rotation.translate(p.getXAxial() + 472, p.getYAxial() + 85);
 			//rotation.rotate(p.getDoubleDirection(),(int)(imgRobot.getWidth(null)/2),(int)(imgRobot.getHeight(null)/2));
 			/*
 			** rotate (double theta, double x, double y)

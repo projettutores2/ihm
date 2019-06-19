@@ -1,3 +1,4 @@
+package TwinTinBots.ihm;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -66,6 +67,9 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.boutonValider = new JButton("Valider");
 		this.boutonValider.addActionListener(this);
 
+		Apparence.setStyleBtn(this.boutonRetour);
+		Apparence.setStyleBtn(this.boutonValider);
+
 		this.add(this.panGlobal, BorderLayout.CENTER);
 		this.add(this.boutonRetour, BorderLayout.SOUTH);
 		this.add(this.boutonValider, BorderLayout.EAST);
@@ -80,10 +84,6 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		{
 			// ...
 			this.dispose();
-		}
-		else if (e.getSource() == this.boutonValider)
-		{
-			this.ctrl.
 		}
 	}
 
@@ -126,7 +126,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		}
 		
 		for (int i = 0; i<this.tabLabelOrdres.length; i++) {
-			this.tabLabelOrdres[i]= new JLabel(new ImageIcon("imgOrdre"+i+".png"));
+			this.tabLabelOrdres[i]= new JLabel(new ImageIcon("./TwinTinBots/img/imgOrdre"+i+".png"));
 			this.tabLabelOrdres[i].addMouseListener(this);
 			this.tabLabelOrdres[i].setTransferHandler(new TransferHandler("icon"));
 			this.panHaut.add(tabLabelOrdres[i]);
@@ -135,10 +135,10 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.repaint();
 	}
 
-	public void lireOrdresPossedes()
+	/*public void lireOrdresPossedes()
 	{
 		/*String s_Img = "imgOrdre0";
-		ImageIcon icon_ImgIcon = new ImageIcon(s_Img);*/
+		ImageIcon icon_ImgIcon = new ImageIcon(s_Img);
 		for (int j = 0; j<this.tabLabelOrdresPossedes.length; j++)
 		{
 			switch(this.tabLabelOrdresPossedes[j].getIcon())
@@ -147,5 +147,5 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 			}
 
 		}
-	}
+	}*/
 }

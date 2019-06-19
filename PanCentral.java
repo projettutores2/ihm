@@ -1,3 +1,4 @@
+package TwinTinBots.ihm;
 import java.awt.*;
 import java.awt.font.*;
 import java.util.*;

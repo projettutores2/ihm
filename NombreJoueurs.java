@@ -1,3 +1,4 @@
+package TwinTinBots.ihm;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -9,9 +10,9 @@ public class NombreJoueurs extends JDialog implements ActionListener
 	private JSpinner spinner;
 	private JPanel panHaut, panBas;
 	private JButton bOk, bCancel;
-	private Menu menu;
+	private Launcher menu;
 
-	public NombreJoueurs(Menu m)
+	public NombreJoueurs(Launcher m)
 	{
 		this.setSize(320,70);
 		this.setLocationRelativeTo(m);
@@ -54,8 +55,8 @@ public class NombreJoueurs extends JDialog implements ActionListener
 			this.dispose();
 		if (e.getSource()==this.bOk)
 		{	
-			this.menu.setNbJ(Integer.valueOf(this.spinner.getValue().toString()));
 			this.dispose();
+			this.menu.setNbJ(Integer.valueOf(this.spinner.getValue().toString()));
 		}
 	}
 }
