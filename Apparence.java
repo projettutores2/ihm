@@ -24,6 +24,14 @@ public class Apparence
 		btn.setForeground(new Color(100, 100, 100));
 		btn.setFont(new Font("Helvetica", Font.BOLD, 20));
 	}
+
+	public static void setStyleLblRetour(JLabel jlab){
+		jlab.setOpaque(true);
+		jlab.setBackground(new Color(177,155,126));
+		jlab.setForeground(new Color(100, 100, 100));
+		jlab.setFont(new Font("Helvetica", Font.BOLD, 20));
+	}
+
 	public static void setStyleBtnRetour(JButton btn){
 		btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btn.setBorderPainted(false);
