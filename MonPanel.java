@@ -74,6 +74,8 @@ public class MonPanel extends JPanel
 			}
 		}*/
 		String s = "Images affichées :\n";
+
+
 		for (Pion p : listePion)
 		{
 			if (p != null)
@@ -83,7 +85,9 @@ public class MonPanel extends JPanel
 				AffineTransform rotation = new AffineTransform();
 				//System.out.println(""+p.getXAxial() + ": "+p.getYAxial());
 				rotation.translate(p.getXAxial(), p.getYAxial());
-				//rotation.rotate(p.getDoubleDirection(),(int)(imgRobot.getWidth(null)/2),(int)(imgRobot.getHeight(null)/2));
+				rotation.rotate( ((5.0 * Math.PI) / 6.0) + (((Robot)p).getDoubleDirection() + 1.0) * (Math.PI / 3.0),
+					             (int)(imgRobot.getWidth(null)/2),
+					             (int)(imgRobot.getHeight(null)/2) );
 
 				s += p.getAdresseImage()+"\n";
 				g2.drawImage (imgRobot, rotation , this);				
