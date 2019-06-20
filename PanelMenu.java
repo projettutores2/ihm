@@ -36,7 +36,7 @@ public class PanelMenu extends JPanel implements ActionListener
 		panelGlobal.putConstraint(SpringLayout.EAST, this.bLancerPartie, -200, SpringLayout.EAST, this);
 		this.add(this.bLancerPartie);
 
-		this.bQuitter = new JButton("Quitter");
+		this.bQuitter = new JButton("Scénario");
 		this.bQuitter.addActionListener(this);	
 		Apparence.setStyleBoutonMenu(this.bQuitter);
 		panelGlobal.putConstraint(SpringLayout.NORTH, this.bQuitter, 10, SpringLayout.SOUTH, this.bLancerPartie);
@@ -51,7 +51,9 @@ public class PanelMenu extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 		if (e.getSource()==this.bQuitter)
-			System.exit(0);
+		{
+			this.menu.lancerPartie(null);
+		}
 		if (e.getSource()==this.bLancerPartie)
 		{
 			this.menu.addPanDemandeJ();

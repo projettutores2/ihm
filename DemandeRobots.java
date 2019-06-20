@@ -27,9 +27,8 @@ public class DemandeRobots extends JDialog implements ActionListener
 		// for (Robot r : this.ctrl.getRobots())
 			// this.listeRobots.addItem(r.getNom());
 		//Pour tester :
-		this.listeRobots.addItem("");
 		for (int i=0; i<2; i++)
-			this.listeRobots.addItem("Indice "+i);
+			this.listeRobots.addItem("" + i);
 
 		this.boutonValider = new JButton("Modifier ce robot");
 		this.boutonValider.addActionListener(this);
@@ -50,7 +49,7 @@ public class DemandeRobots extends JDialog implements ActionListener
 		if (e.getSource() == this.boutonValider)
 		{
 			this.dispose();
-			new Tab2(this.fenP, "Ordres de votre robot", true, this.ctrl,1).setVisible(true);			
+			new Tab2(this.fenP, "Ordres de votre robot", true, this.ctrl,this.listeRobots.getSelectedIndex()).setVisible(true);			
 		}
 	}
 

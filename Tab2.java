@@ -1,6 +1,7 @@
 package TwinTinBots.ihm;
 import TwinTinBots.metier.Joueur;
 import TwinTinBots.metier.Ordre;
+import TwinTinBots.metier.ModifAlgo;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 	private JPanel panBoutonsDeDroite;
 	private JPanel panEnsembleBoutonsCombo;
 	private JComboBox<String> listeImage1, listeImage2;
+	private ModifAlgo modifAlgo;
 
 
 	/*Pour les tests*/
@@ -32,7 +34,11 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		super (f, titre, modal);
 		this.ctrl = ctrl;
 		this.fenP = f;
-		this.initComponents(idRobot);		
+		this.tabLabelOrdresPossedes = new JLabel[3];
+		this.initComponents(idRobot);
+		this.modifAlgo = this.ctrl.getMetier().getModifAlgo();
+		this.modifAlgo.setJoueur(this.ctrl.getMetier().getJoueurActif());
+		this.modifAlgo.setRobot(this.modifAlgo.getJoueur().getRobot(idRobot));
 	}
 	private void initComponents(int idRobot)
 	{
@@ -91,14 +97,14 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.add(this.panBoutonsDeDroite, BorderLayout.EAST);
 
 		this.setResizable(false);		
-		this.setSize(800,400);
+		this.setSize(1000,400);
 		this.setLocationRelativeTo(this.fenP);
 	}	
 	public void actionPerformed(ActionEvent e)
 	{
 		if (e.getSource()==this.boutonRetour)
 		{
-			// ...
+			this.modifAlgo.setTypeModif(5);
 			this.dispose();
 		}
 		else if (e.getSource()==this.boutonTransformer)
@@ -110,7 +116,12 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		}
 		else if (e.getSource()==this.boutonCorbeille)
 		{
+			this.modifAlgo.setTypeModif(4);
 			this.majSupprimerAffichageOrdres();
+		}
+		else if (e.getSource()==this.boutonValider)
+		{
+			this.dispose();
 		}
 	}
 
@@ -132,6 +143,10 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.tabLabelOrdresPossedes[o1].setIcon(new ImageIcon(this.tabLabelOrdresPossedes[o2].getIcon().toString()));
 
 		this.tabLabelOrdresPossedes[o2].setIcon(new ImageIcon(iconTemporaire.toString()));
+
+		this.modifAlgo.setTypeModif(2);
+		this.modifAlgo.setSlot(o1);
+		this.modifAlgo.setSlot2(o2);
 
 		this.revalidate();
 		this.repaint();
@@ -172,8 +187,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 
 	public void majPanel()
 	{
-		for(Ordre ordre : this.ctrl.getMetier().getJoueurActif().getStockOrdres())
-			this.panHaut.remove(ordre.getImg());
+		this.panHaut.removeAll();
 		/*for (int i = 0; i<this.tabLabelOrdres.length; i++) {
 			this.panHaut.remove(this.tabLabelOrdres[i]);
 		}*/
@@ -193,7 +207,6 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 	{
 		for(Ordre ordre : this.ctrl.getMetier().getJoueurActif().getStockOrdres())
 		{
-			System.out.println(ordre);
 			ordre.getImg().addMouseListener(this);
 			ordre.getImg().setTransferHandler(new TransferHandler("icon"));
 			this.panHaut.add(ordre.getImg());
@@ -202,17 +215,29 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 
 	private void algoRobot(int idRobot)
 	{
+		int i = 0;
+		System.out.println(this.ctrl.getMetier().getJoueurActif().getNom());
+		try{Thread.sleep(500);}
+		catch(Exception e){}
 		for(Ordre ordre : this.ctrl.getMetier().getJoueurActif().getRobot(idRobot).getAlgo())
 		{
-			JLabel lblOrdre ;
+			System.out.println(ordre);
 			if(ordre == null) 
-				lblOrdre = new JLabel(new ImageIcon("vide.png"));
-			else lblOrdre=ordre.getImg();
-			lblOrdre.addMouseListener(this);
-			lblOrdre.setTransferHandler(new TransferHandler("icon"));
-			lblOrdre.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY));
-			this.panBas.add(lblOrdre);	
+				this.tabLabelOrdresPossedes[i] = new JLabel(new ImageIcon("vide.png"));
+			else
+			{
+				this.tabLabelOrdresPossedes[i] = ordre.getImg();
+				System.out.println(this.tabLabelOrdresPossedes[i].getIcon());
+			}
+			System.out.println(i);
+			this.tabLabelOrdresPossedes[i].addMouseListener(this);
+			this.tabLabelOrdresPossedes[i].setTransferHandler(new TransferHandler("icon"));
+			this.tabLabelOrdresPossedes[i].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY));
+			this.panBas.add(this.tabLabelOrdresPossedes[i]);
+			i++;
 		}
+		this.revalidate();
+		this.repaint();
 	}
 	private JButton creeButton(String nom,JPanel panel)
 	{
@@ -233,9 +258,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		{
 			switch(this.tabLabelOrdresPossedes[j].getIcon())
 			{
-
 			}
-
 		}
 	}*/
 }

@@ -13,12 +13,22 @@ public class Apparence
 	{
 		lbl.setFont(new Font("Helvetica", Font.BOLD, 20));
 		lbl.setForeground(new Color(100, 100, 100));
+		lbl.setOpaque(true);
+		lbl.setBackground(new Color(197,175,146));
 	}
 	public static void setStyleBtn(JButton btn){
 		btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btn.setBorderPainted(false);
 		btn.setFocusable(false);
 		btn.setBackground(new Color(197,175,146));
+		btn.setForeground(new Color(100, 100, 100));
+		btn.setFont(new Font("Helvetica", Font.BOLD, 20));
+	}
+	public static void setStyleBtnRetour(JButton btn){
+		btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btn.setBorderPainted(false);
+		btn.setFocusable(false);
+		btn.setBackground(new Color(177,155,126));
 		btn.setForeground(new Color(100, 100, 100));
 		btn.setFont(new Font("Helvetica", Font.BOLD, 20));
 	}

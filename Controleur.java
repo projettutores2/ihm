@@ -4,6 +4,8 @@ import TwinTinBots.metier.Joueur;
 import TwinTinBots.metier.Pion;
 import TwinTinBots.metier.Ordre;
 import TwinTinBots.metier.Robot;
+import TwinTinBots.metier.ModifAlgo;
+
 import java.util.ArrayList;
 public class Controleur
 {
@@ -14,9 +16,8 @@ public class Controleur
 
 	public Controleur(String[] tabNoms)
 	{
-		/*if(debug.equals("debug"))*/ DEBUG = false;
+		if(tabNoms==null)DEBUG =true;
 		this.metier = new Metier(this, tabNoms);
-		
 		this.ihm    = new FenPrincipale(this);
 
 		//boucle de jeu
@@ -34,17 +35,14 @@ public class Controleur
 
 	//--------------------------------------------------------------
 	//                          LIEN AFFICHAGE
-	public void afficherAlgo(Joueur joueur)        { /*this.ihm.afficherAlgo(joueur);                       */}
-	public void afficherStockJoueur(Joueur joueur) { /*this.ihm.afficherStockJoueur(joueur);                */}
-	public int  demandeAction()                    { return 0;/*return this.ihm.demandeAction();            */}
-	public int  choisirSlot()                      { return 0;/*return this.ihm.choisirSlot();              */}
-	public int  choisirRobot()                     { return 0;/*return this.ihm.choisirRobot();             */}
-	public int  choisirOrdreJoueur(Joueur joueur)  { return 0;/*return this.ihm.choisirOrdreJoueur(joueur); */}
+	public void afficherAlgo(Joueur joueur)        { /*this.ihm.afficherAlgo(joueur);        */}
+	public void afficherStockJoueur(Joueur joueur) { /*this.ihm.afficherStockJoueur(joueur); */}
+	public ModifAlgo  demandeModif()               { return this.ihm.demandeModif();           }
 	
 	//--------------------------------------------------------------
 	//                            LIEN SCANNER
 	public int    nombreDeJoueur () { return 2 ;      }
-	public String creeJoueur     () { return "teste ";}
+	public String creeJoueur     () { return "test ";}
 
 	public void afficherJeu() { this.ihm.afficherJeu(); }
 

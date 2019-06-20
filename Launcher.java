@@ -43,7 +43,6 @@ public class Launcher extends JFrame
 		this.tabNoms = tabNoms;
 		this.lancerP = true;
 		this.dispose();
-		//new Controleur(tabNoms);
 	}
 
 	public static void main (String[] a)

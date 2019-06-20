@@ -1,6 +1,7 @@
 package TwinTinBots.ihm;
 import TwinTinBots.metier.Joueur;
 import TwinTinBots.metier.Pion;
+import TwinTinBots.metier.ModifAlgo;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
@@ -33,12 +34,21 @@ public class FenPrincipale extends JFrame
 		this.addWindowListener(new WindowAdapter() { @Override public void windowClosing(WindowEvent e) { System.exit(0); } });
 		this.setResizable(false);
 		this.setVisible(true);
+	}
+
+	public ModifAlgo demandeModif()
+	{
+		return new ModifAlgo(5);
+	}
+
+	public void executer()
+	{
 
 	}
 
 	public void afficherJeu()
 	{
-		this.monPanel.revalidate();
-		this.monPanel.repaint();
+		this.monPanel.maj();
+		this.panDroit.majPanel();
 	}
 }
