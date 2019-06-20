@@ -18,11 +18,11 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 	private Controleur ctrl;
 	private FenPrincipale fenP;
 	private JPanel panHaut, panBas, panGlobal;
-	private JButton boutonRetour, boutonValider, boutonTransformer, boutonCorbeille;
+	private JButton boutonRetour, boutonValider, boutonTransformer, boutonAppliquer, boutonCorbeille, boutonSupprimerIndice;
 	//ensemble de l'écran avec les images + fonction "transformer"
 	private JPanel panBoutonsDeDroite;
 	private JPanel panEnsembleBoutonsCombo;
-	private JComboBox<String> listeImage1, listeImage2;
+	private JComboBox<String> listeImage1, listeImage2, listeImage3, listeImage4, listeImage5;
 	private ModifAlgo modifAlgo;
 
 
@@ -58,31 +58,44 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.panBoutonsDeDroite = new JPanel();
 		this.panBoutonsDeDroite.setLayout(new GridLayout(3,1));
 		this.panEnsembleBoutonsCombo = new JPanel();
-		this.panEnsembleBoutonsCombo.setLayout(new GridLayout(1,4));
+		this.panEnsembleBoutonsCombo.setLayout(new GridLayout(3,4));
 		//init
 		this.afficherOrdres();
 		this.algoRobot(idRobot);
 
-		//cree les boutton et ajout des boutton
+		//cree les boutton et ajout des button
 		this.boutonRetour=this.creeButton("Retour",this.panBoutonsDeDroite);
 		Apparence.setStyleBtnRetour(this.boutonRetour);
 		this.boutonValider=this.creeButton("Valider",this.panBoutonsDeDroite);
 		Apparence.setStyleBtn(this.boutonValider);
 		this.boutonCorbeille=this.creeButton("Supprimer",this.panBoutonsDeDroite);
-		Apparence.setStyleBtn(this.boutonCorbeille);
+		Apparence.setStyleBtnRetour(this.boutonCorbeille);
 		this.boutonTransformer=this.creeButton("Echanger",this.panEnsembleBoutonsCombo);
+		Apparence.setStyleBtnRetour(this.boutonTransformer);
+		this.boutonAppliquer=this.creeButton("Appliquer",this.panEnsembleBoutonsCombo);
+		Apparence.setStyleBtn(this.boutonAppliquer);
+		this.boutonSupprimerIndice=this.creeButton("Supprimer (indice)", this.panEnsembleBoutonsCombo);
+		Apparence.setStyleBtnRetour(this.boutonSupprimerIndice);
 
 		this.listeImage1 = new JComboBox<String>();
 		this.listeImage2 = new JComboBox<String>();
+		this.listeImage3 = new JComboBox<String>();
+		this.listeImage4 = new JComboBox<String>();
+		this.listeImage5 = new JComboBox<String>();
 
-		this.listeImage1.addItem("");		
-		this.listeImage2.addItem("");
 		for (int i=0; i<NOMBRE_ORDRES_POSSEDES; i++)
 		{
 			this.listeImage1.addItem("Indice "+i);
 			this.listeImage2.addItem("Indice "+i);
+			this.listeImage4.addItem("Indice "+i);
+			this.listeImage5.addItem("Indice "+i);
+		}
+		for (int i=0; i<13; i++)
+		{
+			this.listeImage3.addItem("Indice "+i);
 		}
 
+		this.panEnsembleBoutonsCombo.add(this.boutonTransformer);
 		this.panEnsembleBoutonsCombo.add (this.listeImage1);
 		JLabel jLab = new JLabel(" avec ");
 		Apparence.setStyleLbl(jLab);
@@ -91,13 +104,33 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.panEnsembleBoutonsCombo.add (jLab);
 		this.panEnsembleBoutonsCombo.add (this.listeImage2);
 
+		this.panEnsembleBoutonsCombo.add(this.boutonAppliquer);
+		this.panEnsembleBoutonsCombo.add(this.listeImage3);
+		JLabel jLab2 = new JLabel(" vers ");
+		Apparence.setStyleLblRetour(jLab2);
+		jLab2.setHorizontalAlignment(JLabel.CENTER);
+		jLab2.setVerticalAlignment(JLabel.CENTER);
+		this.panEnsembleBoutonsCombo.add(jLab2);
+		this.panEnsembleBoutonsCombo.add(this.listeImage4);
+
+		this.panEnsembleBoutonsCombo.add(this.boutonSupprimerIndice);
+		this.panEnsembleBoutonsCombo.add(listeImage5);
+
+		//Pour remettre un fond esthétiquement correct :
+		JLabel[] tabFond = new JLabel[2];
+		for (int i=0; i<2; i++)
+		{
+			tabFond[i] = new JLabel();
+			Apparence.setStyleLbl(tabFond[i]);
+			this.panEnsembleBoutonsCombo.add(tabFond[i]); 
+		}
 
 		this.add(this.panGlobal, BorderLayout.CENTER);
 		this.add(this.panEnsembleBoutonsCombo, BorderLayout.SOUTH);
 		this.add(this.panBoutonsDeDroite, BorderLayout.EAST);
 
-		this.setResizable(false);		
-		this.setSize(1000,400);
+		//this.setResizable(false);		
+		this.setSize(1600,400);
 		this.setLocationRelativeTo(this.fenP);
 	}	
 	public void actionPerformed(ActionEvent e)
@@ -123,6 +156,25 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		{
 			this.dispose();
 		}
+		else if (e.getSource() == this.boutonAppliquer)
+		{
+			this.majApplication(this.listeImage3.getSelectedIndex(), this.listeImage4.getSelectedIndex());
+		}
+		else if (e.getSource() == this.boutonSupprimerIndice)
+		{
+			this.majSuppressionAvecIndice(this.listeImage5.getSelectedIndex());
+		}
+	}
+
+	public void majSuppressionAvecIndice(int o1)
+	{
+		for (int i=0; i<this.tabLabelOrdresPossedes.length; i++)
+		{
+			if (i==o1)
+				this.tabLabelOrdresPossedes[i].setIcon(new ImageIcon("vide.png"));
+			this.revalidate();
+			this.repaint();
+		}
 	}
 
 	public void majSupprimerAffichageOrdres()
@@ -134,11 +186,48 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 			this.repaint();
 		}
 	}
+	public void majApplication(int o1, int o2)
+	{
+		for(int i=0; i<this.ctrl.getMetier().getJoueurActif().getStockOrdres().size(); i++)
+		{
+			if (i==o1)
+			{
+				Icon iconTemporaire = this.ctrl.getMetier().getJoueurActif().getStockOrdres().get(i).getImg().getIcon();
+				this.tabLabelOrdresPossedes[o2].setIcon(new ImageIcon(iconTemporaire.toString()));
+
+				this.revalidate();
+				this.repaint();
+			}
+
+			/*String s = ordre.getImg().getIcon().toString();
+			System.out.println("ENTREE COMPTAGE "+ s);
+			switch (s)
+			{
+				case "./TwinTinBots/img/imgOrdre0.png":
+					this.nombreChaqueOrdre[0] = this.nombreChaqueOrdre[0] + 1;
+					break;
+				case "./TwinTinBots/img/imgOrdre1.png":
+					this.nombreChaqueOrdre[1] = this.nombreChaqueOrdre[1] + 1;
+					break;
+				case "./TwinTinBots/img/imgOrdre2.png":
+					this.nombreChaqueOrdre[2] = this.nombreChaqueOrdre[2] + 1;
+					break;
+				case "./TwinTinBots/img/imgOrdre3.png":
+					this.nombreChaqueOrdre[3] = this.nombreChaqueOrdre[3] + 1;
+					break;
+				case "./TwinTinBots/img/imgOrdre4.png":
+					this.nombreChaqueOrdre[4] = this.nombreChaqueOrdre[4] + 1;
+					break;
+				case "./TwinTinBots/img/imgOrdre5.png":
+					this.nombreChaqueOrdre[5] = this.nombreChaqueOrdre[5] + 1;
+					break;
+			}*/
+		}
+	}
 
 	public void majEchange(int o1, int o2)
 	{
 		System.out.println("entree");
-		o1--;o2--;
 		Icon iconTemporaire = this.tabLabelOrdresPossedes[o1].getIcon();
 		this.tabLabelOrdresPossedes[o1].setIcon(new ImageIcon(this.tabLabelOrdresPossedes[o2].getIcon().toString()));
 
