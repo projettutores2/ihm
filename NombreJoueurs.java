@@ -3,6 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Toolkit;
+import javax.swing.JSpinner.DefaultEditor;
 
 public class NombreJoueurs extends JDialog implements ActionListener
 {
@@ -19,7 +20,8 @@ public class NombreJoueurs extends JDialog implements ActionListener
 		this.menu = m;
 		this.spinNbJ = new SpinnerNumberModel(2,2,6,1);
 		this.setUndecorated(true);
-		this.spinner = new JSpinner(this.spinNbJ);   
+		this.spinner = new JSpinner(this.spinNbJ);
+		((DefaultEditor) this.spinner.getEditor()).getTextField().setEditable(false);   
 		this.spinner.setBounds(100,100,50,30);  
 
 		this.panHaut = new JPanel();

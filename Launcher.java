@@ -10,6 +10,7 @@ public class Launcher extends JFrame
 	private PanelMenu panelAccueil;
 	private NombreJoueurs panelDemandeJ;
 	private NomsJoueurs panNomsJ;
+	private Scenario scenario;
 	private int nbJoueurs;
 	private String[] tabNoms;
 
@@ -19,6 +20,7 @@ public class Launcher extends JFrame
 		this.setLocationRelativeTo(null);
 		this.panelAccueil  = new PanelMenu(this);
 		this.panelDemandeJ = new NombreJoueurs(this);
+		this.scenario      = new Scenario(this);
 		this.setContentPane(this.panelAccueil);	
 
 		this.setVisible(true);
@@ -31,6 +33,10 @@ public class Launcher extends JFrame
 	{
 		this.panelDemandeJ.setVisible(true);
 	}
+	public void addScenario()
+	{
+		this.scenario.setVisible(true);
+	}
 
 	public void setNbJ(int i)
 	{
@@ -41,6 +47,13 @@ public class Launcher extends JFrame
 	public void lancerPartie(String[] tabNoms)
 	{
 		this.tabNoms = tabNoms;
+		this.lancerP = true;
+		this.dispose();
+	}
+		public void lancerPartie(String nom)
+	{
+		this.tabNoms = new String[1];
+		this.tabNoms[0]=nom;
 		this.lancerP = true;
 		this.dispose();
 	}

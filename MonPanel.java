@@ -37,8 +37,11 @@ public class MonPanel extends JPanel
 		String sImage;
 
 		// Ajout de l'image du fond
-		
-		Image img = new ImageIcon(new ImageIcon("TwinTinBots/img/plateau2-4.jpg").getImage().getScaledInstance(LARGEUR, HAUTEUR, Image.SCALE_DEFAULT)).getImage();
+		Image img;
+		if(this.ctrl.getMetier().getNbJoueurs()<4)
+			img = new ImageIcon(new ImageIcon("TwinTinBots/img/plateau2-4.jpg").getImage().getScaledInstance(LARGEUR, HAUTEUR, Image.SCALE_DEFAULT)).getImage();
+		else
+			img = new ImageIcon(new ImageIcon("TwinTinBots/img/plateau5-6.jpg").getImage().getScaledInstance(LARGEUR, HAUTEUR, Image.SCALE_DEFAULT)).getImage();
 
 
 		g2.drawImage ( img, 0,0, this );
@@ -85,9 +88,10 @@ public class MonPanel extends JPanel
 				AffineTransform rotation = new AffineTransform();
 				//System.out.println(""+p.getXAxial() + ": "+p.getYAxial());
 				rotation.translate(p.getXAxial(), p.getYAxial());
-				rotation.rotate( ((5.0 * Math.PI) / 6.0) + (((Robot)p).getDoubleDirection() + 1.0) * (Math.PI / 3.0),
-					             (int)(imgRobot.getWidth(null)/2),
-					             (int)(imgRobot.getHeight(null)/2) );
+				if(p instanceof Robot)
+					rotation.rotate( ((5.0 * Math.PI) / 6.0) + (((Robot)p).getDoubleDirection() + 1.0) * (Math.PI / 3.0),
+						             (int)(imgRobot.getWidth(null)/2),
+						             (int)(imgRobot.getHeight(null)/2) );
 
 				s += p.getAdresseImage()+"\n";
 				g2.drawImage (imgRobot, rotation , this);				

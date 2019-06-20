@@ -188,6 +188,10 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 	}
 	public void majApplication(int o1, int o2)
 	{
+		this.modifAlgo.setTypeModif(1);
+		this.modifAlgo.setNewOrdre(o1);
+		this.modifAlgo.setSlot(o2);
+
 		for(int i=0; i<this.ctrl.getMetier().getJoueurActif().getStockOrdres().size(); i++)
 		{
 			if (i==o1)

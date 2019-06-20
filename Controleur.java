@@ -16,7 +16,7 @@ public class Controleur
 
 	public Controleur(String[] tabNoms)
 	{
-		if(tabNoms==null)DEBUG =true;
+		if(tabNoms.length == 1 ) DEBUG =true;
 		this.metier = new Metier(this, tabNoms);
 		this.ihm    = new FenPrincipale(this);
 
