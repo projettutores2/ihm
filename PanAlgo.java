@@ -41,7 +41,6 @@ class PanTabAlgo extends JPanel
 
 	public PanTabAlgo( Ordre[] algoRobot )
 	{
-		String path = "./TwinTinBots/img/";
 		this.tabLabelOrdresRobot = new JLabel[NOMBRE_ORDRE_ROBOT];
 		this.setLayout( new GridLayout( 1, NOMBRE_ORDRE_ROBOT ) );
 
@@ -50,9 +49,9 @@ class PanTabAlgo extends JPanel
 		{
 			if ( algoRobot[i] != null )
 			{
-				this.tabLabelOrdresRobot[i] = new JLabel( new ImageIcon( path + "" + algoRobot[i].getImgOrdre() ) );
+				this.tabLabelOrdresRobot[i] = algoRobot[i].getImg();
 			}
-			else  this.tabLabelOrdresRobot[i]= new JLabel(new ImageIcon( path + "vide.png"));
+			else  this.tabLabelOrdresRobot[i]= new JLabel(new ImageIcon( "./TwinTinBots/img/vide.png"));
 
 			this.tabLabelOrdresRobot[i].setTransferHandler(new TransferHandler("icon"));
 			this.tabLabelOrdresRobot[i].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY));
