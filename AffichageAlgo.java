@@ -7,19 +7,25 @@ import java.util.ArrayList;
 import TwinTinBots.metier.Robot;
 import TwinTinBots.metier.Joueur;
 
-public class AffichageAlgo extends JDialog
+public class AffichageAlgo extends JDialog implements ActionListener
 {
 	private Controleur ctrl;
 	private ArrayList<Robot> lstRobots;
 
-	private JScrollPane scrollPane;
 	private ArrayList<PanAlgo> lstPAlgo;
 
 	private FenPrincipale fenP;
 
+	private JButton boutonRetour;
+
 	public AffichageAlgo( FenPrincipale parent, String titre, boolean modal, Controleur ctrl )
 	{
-		super ( parent, titre, modal );
+		this.setTitle(titre);
+		this.setUndecorated(true);
+		this.setModal(modal);
+		this.setSize(800,600);
+		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 
 		this.fenP = parent;
 		this.ctrl = ctrl;
@@ -27,11 +33,6 @@ public class AffichageAlgo extends JDialog
 		this.lstRobots = new ArrayList<Robot>();
 		this.lstPAlgo  = new ArrayList<PanAlgo>();
 
-		//Création d'un panel avec une barre de défilement horizontale
-		//La barre sera affichée au besoin
-		this.scrollPane = new JScrollPane();
-		this.scrollPane.setLayout( new ScrollPaneLayout() );
-		this.scrollPane.setVerticalScrollBarPolicy( ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED );
 
 		//Ajout des Robot de tous les joueurs dans la liste
 		for ( Joueur joueur : this.ctrl.getMetier().getListJoueur() )
@@ -40,7 +41,8 @@ public class AffichageAlgo extends JDialog
 			this.lstRobots.add( joueur.getRobot(1) );
 		}
 
-		this.setLayout( new GridLayout( this.lstRobots.size(), 20 ,1 ,20 ) );
+		JPanel panGlobal = new JPanel();
+		panGlobal.setLayout( new GridLayout( this.lstRobots.size(), 20 ,1 ,20 ) );
 
 		//Création des PanAlgo
 		for ( Robot robot : this.lstRobots )
@@ -50,16 +52,30 @@ public class AffichageAlgo extends JDialog
 
 		for ( PanAlgo pAlgo : this.lstPAlgo )
 		{
-			this.add( pAlgo );
+			panGlobal.add( pAlgo );
 		}
+
+		JScrollPane jsPaneListe    = new JScrollPane(panGlobal,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		jsPaneListe.setOpaque(false);
+		jsPaneListe.setBorder(null);
+		this.add(jsPaneListe);
+
+		this.boutonRetour = new JButton("Retour");
+		this.boutonRetour.addActionListener(this);
+		Apparence.setStyleBoutonMenu(this.boutonRetour);
+		this.add(this.boutonRetour,BorderLayout.SOUTH);
 
 		//this.add( new JLabel("Test") );
 		//this.add( this.scrollPane );
 
 		this.setDefaultCloseOperation( this.DISPOSE_ON_CLOSE );
 		//La fenêtre sera centrée par rapport à la fenêtre principale
-		this.setLocationRelativeTo( null );
-		this.setSize(800,600);
 		this.setResizable(false);
+	}
+
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource()==this.boutonRetour)
+			this.dispose();
 	}
 }

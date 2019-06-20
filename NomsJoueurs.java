@@ -78,8 +78,6 @@ public class NomsJoueurs extends JDialog implements ActionListener
 			}else{
 				JOptionPane.showMessageDialog(null, message, "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
-			
-			
 		}
 	}
 }

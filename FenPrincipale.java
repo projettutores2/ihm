@@ -28,9 +28,9 @@ public class FenPrincipale extends JFrame
 
 		this.add (this.monPanel,  BorderLayout.CENTER);
 		this.add (this.panDroit,  BorderLayout.EAST);
-    	this.setSize    (1200,722);
-    	//this.setLocation( 10, 10);
-    	this.setLocationRelativeTo(null);
+		this.setSize    (1200,722);
+		//this.setLocation( 10, 10);
+		this.setLocationRelativeTo(null);
 		this.addWindowListener(new WindowAdapter() { @Override public void windowClosing(WindowEvent e) { System.exit(0); } });
 		this.setResizable(false);
 		this.setVisible(true);

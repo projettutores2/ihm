@@ -21,8 +21,8 @@ public class NombreJoueurs extends JDialog implements ActionListener
 		this.spinNbJ = new SpinnerNumberModel(2,2,6,1);
 		this.setUndecorated(true);
 		this.spinner = new JSpinner(this.spinNbJ);
-		((DefaultEditor) this.spinner.getEditor()).getTextField().setEditable(false);   
-		this.spinner.setBounds(100,100,50,30);  
+		((DefaultEditor) this.spinner.getEditor()).getTextField().setEditable(false);
+		this.spinner.setBounds(100,100,50,30);
 
 		this.panHaut = new JPanel();
 		this.panBas  = new JPanel();
@@ -47,8 +47,7 @@ public class NombreJoueurs extends JDialog implements ActionListener
 
 		this.setLayout(new GridLayout(2,1));
 		this.add(this.panHaut);
-		this.add(this.panBas);    
-    
+		this.add(this.panBas);
 	}
 
 	public void actionPerformed(ActionEvent e)

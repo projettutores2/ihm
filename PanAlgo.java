@@ -15,6 +15,7 @@ public class PanAlgo extends JPanel
 	{
 		this.setLayout( new BorderLayout() );
 		//this.setLayout( new GridLayout( 2, 1 ) );
+		Apparence.setFondColore(this);
 		this.add( new PanInfoJoueur( nomJoueur ), BorderLayout.NORTH );
 		this.add( new PanTabAlgo   ( algoRobot ), BorderLayout.SOUTH );
 	}
@@ -26,7 +27,9 @@ class PanInfoJoueur extends JPanel
 
 	public PanInfoJoueur( String nomJoueur )
 	{
-		this.add( new JLabel( "Joueur " + (nomJoueur) + ", Robot " + ( PanInfoJoueur.numRobot + 1 ), SwingConstants.CENTER ) );
+		JLabel jLab = new JLabel( "Joueur " + (nomJoueur) + ", Robot " + ( PanInfoJoueur.numRobot + 1 ), SwingConstants.CENTER );
+		Apparence.setStyleLbl(jLab);
+		this.add(jLab);
 		this.setSize( 800, 50 );
 
 		PanInfoJoueur.numRobot++;

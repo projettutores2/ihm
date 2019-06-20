@@ -42,8 +42,8 @@ public class Scenario extends JDialog implements ActionListener
 
 		this.setLayout(new GridLayout(2,1));
 		this.add(this.panHaut);
-		this.add(this.panBas);    
-    
+		this.add(this.panBas);
+
 	}
 
 	public void actionPerformed(ActionEvent e)
