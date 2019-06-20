@@ -25,7 +25,7 @@ public class PanDroit extends JPanel implements ActionListener
 		Apparence.setStyleLbl(this.labTour);
 		this.labJoueur = new JLabel("Joueur en cours : "+this.ctrl.getMetier().getJoueurActif());
 		Apparence.setStyleLbl(this.labJoueur);
-		this.tabNomBoutons = new String[]{"Modifier Robot", "Ex\u00e9cuter Programme"};
+		this.tabNomBoutons = new String[]{"Modifier Robot", "Consulter Algorithmes","Ex\u00e9cuter Programme"};
 		this.tabJButt      = new JButton[this.tabNomBoutons.length];
 		for (int i=0; i<this.tabNomBoutons.length; i++)
 		{
@@ -60,7 +60,12 @@ public class PanDroit extends JPanel implements ActionListener
 		}
 		else if (e.getSource() == this.tabJButt[1])
 		{
-
+			AffichageAlgo affAlgo = new AffichageAlgo( this.fenP, "Consulter Algorithmes", true, this.ctrl );
+			affAlgo.setVisible( true );
+		}
+		else if (e.getSource() == this.tabJButt[2])
+		{
+			
 		}
 
 	}
