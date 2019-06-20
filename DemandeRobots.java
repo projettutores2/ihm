@@ -50,7 +50,7 @@ public class DemandeRobots extends JDialog implements ActionListener
 		if (e.getSource() == this.boutonValider)
 		{
 			this.dispose();
-			new Tab2(this.fenP, "Ordres de votre robot", true, this.ctrl).setVisible(true);			
+			new Tab2(this.fenP, "Ordres de votre robot", true, this.ctrl,1).setVisible(true);			
 		}
 	}
 
