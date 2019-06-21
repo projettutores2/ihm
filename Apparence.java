@@ -82,5 +82,21 @@ public class Apparence
 	public static void setFondScrollPane(JScrollPane jsB)
 	{
 		jsB.getVerticalScrollBar().setBackground(new Color(177,155,126));
+		jsB.getVerticalScrollBar().setUnitIncrement(jsB.getVerticalScrollBar().getUnitIncrement()+20);
+	}
+
+	public static void setStyleVictoire(JLabel jlab)
+	{
+		jlab.setOpaque(true);
+		jlab.setBackground(new Color(177,155,126));
+		jlab.setForeground(new Color(100, 100, 100));
+		jlab.setFont(new Font("Bookman Old Style", Font.BOLD, 25));
+	}
+	public static void setStyleVictoire2(JLabel jlab)
+	{
+		jlab.setOpaque(true);
+		jlab.setBackground(new Color(177,155,126));
+		jlab.setForeground(new Color(100, 100, 100));
+		jlab.setFont(new Font("Bookman Old Style", Font.BOLD, 17));
 	}
 }

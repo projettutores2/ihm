@@ -26,6 +26,8 @@ public class Controleur
 			this.metier.jouer();
 		}
 		while(!this.metier.getEnd());
+		System.out.println("POINT A");
+		this.ihm.victoire();
 	}
 
 	/*public static void main(String[] agrs)
@@ -43,13 +45,15 @@ public class Controleur
 	//                            LIEN SCANNER
 	public int    nombreDeJoueur () { return 2 ;      }
 	public String creeJoueur     () { return "test ";}
+	public void envoiChaine      (String chaine) { this.metier.setPositionCristaux(chaine);}
 
 	public void afficherJeu() { this.ihm.afficherJeu(); }
 
 	//--------------------------------------------------------------
 	//                             GET
-	public FenPrincipale getIhm()    { return this.ihm ;  }
-	public Metier        getMetier() { return this.metier;}
+	public FenPrincipale getIhm()     { return this.ihm ;  }
+	public Metier        getMetier()  { return this.metier;}
+	public String        getGagnant() { return this.metier.getGagnant(); }
 
 	public ArrayList<String> getStockJoueur(Joueur joueur)
 	{

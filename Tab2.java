@@ -216,8 +216,6 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 				this.repaint();
 			}
 		}
-
-		System.out.println(this.modifAlgo.getType());
 		if(this.modifAlgo.getType()!=5 && this.ctrl.getMetier().getNombreTour()==1)
 		{
 			this.modifAlgo2.setTypeModif(1);
@@ -258,7 +256,6 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 
 	public void majEchange(int o1, int o2)
 	{
-		System.out.println("entree");
 		Icon iconTemporaire = this.tabLabelOrdresPossedes[o1].getIcon();
 		this.tabLabelOrdresPossedes[o1].setIcon(new ImageIcon(this.tabLabelOrdresPossedes[o2].getIcon().toString()));
 
@@ -346,20 +343,14 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 	private void algoRobot(int idRobot)
 	{
 		int i = 0;
-		System.out.println(this.ctrl.getMetier().getJoueurActif().getNom());
 		try{Thread.sleep(500);}
 		catch(Exception e){}
 		for(Ordre ordre : this.ctrl.getMetier().getJoueurActif().getRobot(idRobot).getAlgo())
 		{
-			System.out.println(ordre);
 			if(ordre == null) 
 				this.tabLabelOrdresPossedes[i] = new JLabel(new ImageIcon("vide.png"));
 			else
-			{
 				this.tabLabelOrdresPossedes[i] = ordre.getImg();
-				System.out.println(this.tabLabelOrdresPossedes[i].getIcon());
-			}
-			System.out.println(i);
 			this.tabLabelOrdresPossedes[i].addMouseListener(this);
 			this.tabLabelOrdresPossedes[i].setTransferHandler(new TransferHandler("icon"));
 			this.tabLabelOrdresPossedes[i].setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.GRAY));

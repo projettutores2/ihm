@@ -40,7 +40,7 @@ public class DemandeRobots extends JDialog implements ActionListener
 
 		//La fenêtre sera centrée par rapport à la fenêtre principale
 		this.setLocationRelativeTo(this.fenP);
-		this.setSize(300,100);
+		this.setSize(150,100);
 		this.setResizable(false);
 	}
 

@@ -98,7 +98,6 @@ public class MonPanel extends JPanel
 						int valCristal = ((Robot)p).getCristal().getValeur();
 						imgCristalIcon = new ImageIcon( new ImageIcon("./TwinTinBots/img/cristal" + valCristal + "Robot.png" ).getImage().getScaledInstance(57, 60, Image.SCALE_DEFAULT) );
 						imgCristal = imgCristalIcon.getImage();
-						System.out.println("Création image Cristal : " + imgCristalIcon.getImage() );
 					}
 
 					rotation.rotate( ((5.0 * Math.PI) / 6.0) + (((Robot)p).getDoubleDirection() + 0.85 ) * (Math.PI / 3.0),
@@ -111,7 +110,6 @@ public class MonPanel extends JPanel
 				g2.drawImage(imgRobot  , rotation , this);
 				if ( imgCristal != null )
 				{	
-					System.out.println("affichage image Cristal " + imgCristalIcon.getImage() );
 					g2.drawImage(imgCristal, rotation , this);
 				}
 			}
