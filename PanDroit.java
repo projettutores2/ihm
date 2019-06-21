@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class PanDroit extends JPanel implements ActionListener
 {
 	private Controleur ctrl;
-	private JLabel     labTour, labJoueur;
+	private JLabel     labTour, labJoueur, labScore;
 	private String[]   tabNomBoutons;
 	private JButton[]  tabJButt;
 	private FenPrincipale fenP;
@@ -26,6 +26,8 @@ public class PanDroit extends JPanel implements ActionListener
 		Apparence.setStyleLbl(this.labTour);
 		this.labJoueur = new JLabel("Joueur en cours : "+this.ctrl.getMetier().getJoueurActif().getNom());
 		Apparence.setStyleLbl(this.labJoueur);
+		this.labScore  = new JLabel("Score du joueur : "+this.ctrl.getMetier().getScoreJoueurActif());
+		Apparence.setStyleLbl(this.labScore);
 		this.tabNomBoutons = new String[]{"Modifier Robot", "Consulter Algorithmes", "Ex\u00e9cuter Programme"};
 		this.tabJButt      = new JButton[this.tabNomBoutons.length];
 		for (int i=0; i<this.tabNomBoutons.length; i++)
@@ -41,6 +43,8 @@ public class PanDroit extends JPanel implements ActionListener
 		this.add(this.labTour);
 		this.add(Box.createVerticalStrut(20));
 		this.add(this.labJoueur);
+		this.add(Box.createVerticalStrut(20));
+		this.add(this.labScore);
 		this.add(Box.createVerticalStrut(20));
 		
 		//ajout des boutons
@@ -67,7 +71,6 @@ public class PanDroit extends JPanel implements ActionListener
 		else if (e.getSource() == this.tabJButt[2])
 		{
 			this.ctrl.getMetier().getModifAlgo().setReady(true);
-			this.ctrl.getMetier().getModifAlgo2().setReady(true);
 		}
 
 	}
@@ -77,6 +80,7 @@ public class PanDroit extends JPanel implements ActionListener
 		int tour = this.ctrl.getMetier().getNombreTour();
 		this.labTour.setText("Tour en cours   : "+tour);
 		this.labJoueur.setText("Joueur en cours : "+this.ctrl.getMetier().getJoueurActif().getNom());
+		this.labScore.setText("Score du joueur : "+this.ctrl.getMetier().getScoreJoueurActif());
 		//this.fenP.majScore();
 		this.revalidate();
 		this.repaint();

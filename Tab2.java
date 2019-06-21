@@ -23,7 +23,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 	private JPanel panBoutonsDeDroite;
 	private JPanel panEnsembleBoutonsCombo;
 	private JComboBox<String> listeImage1, listeImage2, listeImage3, listeImage4, listeImage5;
-	private ModifAlgo modifAlgo, modifAlgo2;
+	private ModifAlgo modifAlgo;
 
 
 	/*Pour les tests*/
@@ -34,19 +34,26 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		super (f, titre, modal);
 		this.ctrl = ctrl;
 		this.fenP = f;
+		Toolkit kit = Toolkit.getDefaultToolkit(); 
+        // Modifier l'icône de JFrame
+        String s= "./TwinTinBots/img/";
+        if (idRobot == 0)
+            s+="grosRobot";
+        else
+            s+="petitRobot";
+        s+=this.ctrl.getMetier().getIndJoueurActif()+".png";
+        Image img = kit.getImage(s);
+        setIconImage(img);
 		this.tabLabelOrdresPossedes = new JLabel[3];
 		this.initComponents(idRobot);
 		this.modifAlgo  = this.ctrl.getMetier().getModifAlgo();
-		this.modifAlgo2 = this.ctrl.getMetier().getModifAlgo2();
 		this.modifAlgo.setJoueur(this.ctrl.getMetier().getJoueurActif());
 		this.modifAlgo.setRobot(this.modifAlgo.getJoueur().getRobot(idRobot));
-		this.modifAlgo2.setJoueur(this.ctrl.getMetier().getJoueurActif());
-		this.modifAlgo2.setRobot(this.modifAlgo2.getJoueur().getRobot(idRobot));
 	}
 	private void initComponents(int idRobot)
 	{
 		this.panHaut = new JPanel();
-		this.panHaut.setLayout(new GridLayout(1,NOMBRE_ORDRES));
+		this.panHaut.setLayout(new GridLayout(2,NOMBRE_ORDRES));
 		this.tabLabelOrdres = new JLabel[NOMBRE_ORDRES];
 
 		this.panBas = new JPanel();
@@ -86,14 +93,14 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.listeImage4 = new JComboBox<String>();
 		this.listeImage5 = new JComboBox<String>();
 
-		for (int i=0; i<NOMBRE_ORDRES_POSSEDES; i++)
+		for (int i=1; i<NOMBRE_ORDRES_POSSEDES+1; i++)
 		{
 			this.listeImage1.addItem("Indice "+i);
 			this.listeImage2.addItem("Indice "+i);
 			this.listeImage4.addItem("Indice "+i);
 			this.listeImage5.addItem("Indice "+i);
 		}
-		for (int i=0; i<13; i++)
+		for (int i=1; i<14; i++)
 		{
 			this.listeImage3.addItem("Indice "+i);
 		}
@@ -133,7 +140,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.add(this.panBoutonsDeDroite, BorderLayout.EAST);
 
 		//this.setResizable(false);		
-		this.setSize(1600,400);
+		this.setSize(1600,500);
 		this.setLocationRelativeTo(this.fenP);
 	}	
 	public void actionPerformed(ActionEvent e)
@@ -141,7 +148,6 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		if (e.getSource()==this.boutonRetour)
 		{
 			this.modifAlgo.setTypeModif(5);
-			this.modifAlgo2.setTypeModif(5);
 			this.dispose();
 		}
 		else if (e.getSource()==this.boutonTransformer)
@@ -154,7 +160,6 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		else if (e.getSource()==this.boutonCorbeille)
 		{
 			this.modifAlgo.setTypeModif(4);
-			this.modifAlgo2.setTypeModif(4);
 			this.majSupprimerAffichageOrdres();
 		}
 		else if (e.getSource()==this.boutonValider)
@@ -173,17 +178,9 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 
 	public void majSuppressionAvecIndice(int o1)
 	{
-		if(this.modifAlgo.getType()!=5 && this.ctrl.getMetier().getNombreTour()==1)
-		{
-			this.modifAlgo2.setTypeModif(3);
-			this.modifAlgo2.setSlot(o1);
-			this.dispose();
-		}
-		else
-		{
-			this.modifAlgo.setTypeModif(3);
-			this.modifAlgo.setSlot(o1);
-		}
+		this.modifAlgo.setTypeModif(3);
+		this.modifAlgo.setSlot(o1);
+		
 		for (int i=0; i<this.tabLabelOrdresPossedes.length; i++)
 		{
 			if (i==o1)
@@ -216,19 +213,11 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 				this.repaint();
 			}
 		}
-		if(this.modifAlgo.getType()!=5 && this.ctrl.getMetier().getNombreTour()==1)
-		{
-			this.modifAlgo2.setTypeModif(1);
-			this.modifAlgo2.setNewOrdre(o1);
-			this.modifAlgo2.setSlot(o2);
-			this.dispose();
-		}
-		else
-		{
-			this.modifAlgo.setTypeModif(1);
-			this.modifAlgo.setNewOrdre(o1);
-			this.modifAlgo.setSlot(o2);
-		}
+
+		this.modifAlgo.setTypeModif(1);
+		this.modifAlgo.setNewOrdre(o1);
+		this.modifAlgo.setSlot(o2);
+		
 			/*String s = ordre.getImg().getIcon().toString();
 			System.out.println("ENTREE COMPTAGE "+ s);
 			switch (s)
@@ -261,20 +250,10 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 
 		this.tabLabelOrdresPossedes[o2].setIcon(new ImageIcon(iconTemporaire.toString()));
 
-		if(this.modifAlgo.getType()!=5 && this.ctrl.getMetier().getNombreTour()==1)
-		{
-			this.modifAlgo2.setTypeModif(2);
-			this.modifAlgo2.setSlot(o1);
-			this.modifAlgo2.setSlot2(o2);
-			this.dispose();
-		}
-		else
-		{
-			this.modifAlgo.setTypeModif(2);
-			this.modifAlgo.setSlot(o1);
-			this.modifAlgo.setSlot2(o2);
-		}
-
+		this.modifAlgo.setTypeModif(2);
+		this.modifAlgo.setSlot(o1);
+		this.modifAlgo.setSlot2(o2);
+		
 		this.revalidate();
 		this.repaint();
 	}
@@ -338,6 +317,16 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 			ordre.getImg().setTransferHandler(new TransferHandler("icon"));
 			this.panHaut.add(ordre.getImg());
 		}
+		int i=0;
+        for (Ordre ordre : this.ctrl.getMetier().getJoueurActif().getStockOrdres())
+        {
+            JLabel indiceOrdre = new JLabel(""+(i+1));
+            Apparence.setStyleLbl(indiceOrdre);
+            indiceOrdre.setHorizontalAlignment(JLabel.CENTER);
+            indiceOrdre.setVerticalAlignment(JLabel.CENTER);
+            this.panHaut.add(indiceOrdre);
+            i++;
+        }
 	}
 
 	private void algoRobot(int idRobot)
