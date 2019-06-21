@@ -68,7 +68,9 @@ public class NomsJoueurs extends JDialog implements ActionListener
 					message+= "\n	- Joueur "+(i+1);
 				}
 			}
-			if (correcte) {
+			boolean correcte2 = this.verification();
+			System.out.println(correcte+"   "+correcte2);
+			if (correcte && correcte2) {
 				String[] tabNom = new String[listJtf.length];
 				for (int i = 0;i<listJtf.length ;i++ ) {
 					tabNom[i]=listJtf[i].getText();
@@ -76,8 +78,28 @@ public class NomsJoueurs extends JDialog implements ActionListener
 				this.dispose();
 				this.menu.lancerPartie(tabNom);
 			}else{
+				message+="\n - Ne pas appeler de la m\u00eame fa\u00e7on deux joueurs ! -";
 				JOptionPane.showMessageDialog(null, message, "Erreur", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+	}
+
+	public boolean verification()
+	{
+		String[] tabNom = new String[listJtf.length];
+				for (int i = 0;i<listJtf.length ;i++ ) {
+					tabNom[i]=listJtf[i].getText();
+				}
+		for (int j=0; j<tabNom.length; j++)
+		{
+			for (int h=0; h<tabNom.length; h++)
+			{
+				if (j!=h)
+				{
+					if (tabNom[j].equals(tabNom[h]))return false;
+				}	
+			}
+		}
+		return true;
 	}
 }
