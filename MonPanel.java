@@ -85,27 +85,46 @@ public class MonPanel extends JPanel
 			{				
 				ImageIcon imgRobotIcon = new ImageIcon(new ImageIcon(p.getAdresseImage()).getImage().getScaledInstance(57, 60, Image.SCALE_DEFAULT));
 				Image imgRobot = imgRobotIcon.getImage();
+				ImageIcon imgCristalIcon = null;
+				Image imgCristal = null;
 				AffineTransform rotation = new AffineTransform();
 				//System.out.println(""+p.getXAxial() + ": "+p.getYAxial());
 				rotation.translate(p.getXAxial(), p.getYAxial());
 				if(p instanceof Robot)
+				{
+					//Si le Robot a un Cristal
+					if ( ((Robot)p).getCristal() != null )
+					{
+						int valCristal = ((Robot)p).getCristal().getValeur();
+						imgCristalIcon = new ImageIcon( new ImageIcon("./TwinTinBots/img/cristal" + valCristal + "Robot.png" ).getImage().getScaledInstance(57, 60, Image.SCALE_DEFAULT) );
+						imgCristal = imgCristalIcon.getImage();
+						System.out.println("Création image Cristal : " + imgCristalIcon.getImage() );
+					}
+
 					rotation.rotate( ((5.0 * Math.PI) / 6.0) + (((Robot)p).getDoubleDirection() + 0.85 ) * (Math.PI / 3.0),
 						             (int)(imgRobot.getWidth(null)/2),
 						             (int)(imgRobot.getHeight(null)/2) );
 
+				}
+
 				s += p.getAdresseImage()+"\n";
-				g2.drawImage (imgRobot, rotation , this);				
+				g2.drawImage(imgRobot  , rotation , this);
+				if ( imgCristal != null )
+				{	
+					System.out.println("affichage image Cristal " + imgCristalIcon.getImage() );
+					g2.drawImage(imgCristal, rotation , this);
+				}
 			}
 		}
 		//System.out.println(s);
 
 		/*
-				** rotate (double theta, double x, double y)
-				** theta est l'angle en radians
-				** on a donc en possibilité de déplacement :
-				** +-      60      |      120     |    180         DEGREE
-				** soit 
-				** +- 0.33*Math.PI | 0.67*Math.PI | 0.1*Math.PI    RADIAN
-				*/
+		** rotate (double theta, double x, double y)
+		** theta est l'angle en radians
+		** on a donc en possibilité de déplacement :
+		** +-      60      |      120     |    180         DEGREE
+		** soit 
+		** +- 0.33*Math.PI | 0.67*Math.PI | 0.1*Math.PI    RADIAN
+		*/
 	}
 }
