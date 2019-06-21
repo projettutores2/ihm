@@ -66,10 +66,8 @@ public class PanDroit extends JPanel implements ActionListener
 		}
 		else if (e.getSource() == this.tabJButt[2])
 		{
-			System.out.println(this.ctrl.getMetier().getModifAlgo().getReady());
 			this.ctrl.getMetier().getModifAlgo().setReady(true);
-			System.out.println(this.ctrl.getMetier().getModifAlgo().getReady());
-
+			this.ctrl.getMetier().getModifAlgo2().setReady(true);
 		}
 
 	}

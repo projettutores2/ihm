@@ -23,7 +23,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 	private JPanel panBoutonsDeDroite;
 	private JPanel panEnsembleBoutonsCombo;
 	private JComboBox<String> listeImage1, listeImage2, listeImage3, listeImage4, listeImage5;
-	private ModifAlgo modifAlgo;
+	private ModifAlgo modifAlgo, modifAlgo2;
 
 
 	/*Pour les tests*/
@@ -36,9 +36,12 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		this.fenP = f;
 		this.tabLabelOrdresPossedes = new JLabel[3];
 		this.initComponents(idRobot);
-		this.modifAlgo = this.ctrl.getMetier().getModifAlgo();
+		this.modifAlgo  = this.ctrl.getMetier().getModifAlgo();
+		this.modifAlgo2 = this.ctrl.getMetier().getModifAlgo2();
 		this.modifAlgo.setJoueur(this.ctrl.getMetier().getJoueurActif());
 		this.modifAlgo.setRobot(this.modifAlgo.getJoueur().getRobot(idRobot));
+		this.modifAlgo2.setJoueur(this.ctrl.getMetier().getJoueurActif());
+		this.modifAlgo2.setRobot(this.modifAlgo2.getJoueur().getRobot(idRobot));
 	}
 	private void initComponents(int idRobot)
 	{
@@ -138,6 +141,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		if (e.getSource()==this.boutonRetour)
 		{
 			this.modifAlgo.setTypeModif(5);
+			this.modifAlgo2.setTypeModif(5);
 			this.dispose();
 		}
 		else if (e.getSource()==this.boutonTransformer)
@@ -150,6 +154,7 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 		else if (e.getSource()==this.boutonCorbeille)
 		{
 			this.modifAlgo.setTypeModif(4);
+			this.modifAlgo2.setTypeModif(4);
 			this.majSupprimerAffichageOrdres();
 		}
 		else if (e.getSource()==this.boutonValider)
@@ -168,6 +173,17 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 
 	public void majSuppressionAvecIndice(int o1)
 	{
+		if(this.modifAlgo.getType()!=5 && this.ctrl.getMetier().getNombreTour()==1)
+		{
+			this.modifAlgo2.setTypeModif(3);
+			this.modifAlgo2.setSlot(o1);
+			this.dispose();
+		}
+		else
+		{
+			this.modifAlgo.setTypeModif(3);
+			this.modifAlgo.setSlot(o1);
+		}
 		for (int i=0; i<this.tabLabelOrdresPossedes.length; i++)
 		{
 			if (i==o1)
@@ -188,9 +204,6 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 	}
 	public void majApplication(int o1, int o2)
 	{
-		this.modifAlgo.setTypeModif(1);
-		this.modifAlgo.setNewOrdre(o1);
-		this.modifAlgo.setSlot(o2);
 
 		for(int i=0; i<this.ctrl.getMetier().getJoueurActif().getStockOrdres().size(); i++)
 		{
@@ -202,7 +215,22 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 				this.revalidate();
 				this.repaint();
 			}
+		}
 
+		System.out.println(this.modifAlgo.getType());
+		if(this.modifAlgo.getType()!=5 && this.ctrl.getMetier().getNombreTour()==1)
+		{
+			this.modifAlgo2.setTypeModif(1);
+			this.modifAlgo2.setNewOrdre(o1);
+			this.modifAlgo2.setSlot(o2);
+			this.dispose();
+		}
+		else
+		{
+			this.modifAlgo.setTypeModif(1);
+			this.modifAlgo.setNewOrdre(o1);
+			this.modifAlgo.setSlot(o2);
+		}
 			/*String s = ordre.getImg().getIcon().toString();
 			System.out.println("ENTREE COMPTAGE "+ s);
 			switch (s)
@@ -226,7 +254,6 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 					this.nombreChaqueOrdre[5] = this.nombreChaqueOrdre[5] + 1;
 					break;
 			}*/
-		}
 	}
 
 	public void majEchange(int o1, int o2)
@@ -237,9 +264,19 @@ public class Tab2 extends JDialog implements ActionListener, MouseListener
 
 		this.tabLabelOrdresPossedes[o2].setIcon(new ImageIcon(iconTemporaire.toString()));
 
-		this.modifAlgo.setTypeModif(2);
-		this.modifAlgo.setSlot(o1);
-		this.modifAlgo.setSlot2(o2);
+		if(this.modifAlgo.getType()!=5 && this.ctrl.getMetier().getNombreTour()==1)
+		{
+			this.modifAlgo2.setTypeModif(2);
+			this.modifAlgo2.setSlot(o1);
+			this.modifAlgo2.setSlot2(o2);
+			this.dispose();
+		}
+		else
+		{
+			this.modifAlgo.setTypeModif(2);
+			this.modifAlgo.setSlot(o1);
+			this.modifAlgo.setSlot2(o2);
+		}
 
 		this.revalidate();
 		this.repaint();
