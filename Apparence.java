@@ -45,7 +45,7 @@ public class Apparence
 		btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btn.setBorderPainted(false);
 		btn.setFocusable(false);
-		btn.setBackground(new Color(197,175,146));
+		btn.setBackground(new Color(160,124,86));
 		btn.setForeground(new Color(100, 100, 100));
 		btn.setFont(new Font("Helvetica", Font.BOLD, 20));
 	}
@@ -77,5 +77,10 @@ public class Apparence
 		JLabel label_01 = new JLabel("");
 		label_01.setIcon(new ImageIcon("./TwinTinBots/fondOrdres"+(k+2)+".png"));
 		pan.add(label_01);
+	}
+
+	public static void setFondScrollPane(JScrollPane jsB)
+	{
+		jsB.getVerticalScrollBar().setBackground(new Color(177,155,126));
 	}
 }

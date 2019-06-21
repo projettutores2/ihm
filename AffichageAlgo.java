@@ -56,6 +56,7 @@ public class AffichageAlgo extends JDialog implements ActionListener
 		}
 
 		JScrollPane jsPaneListe    = new JScrollPane(panGlobal,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		Apparence.setFondScrollPane(jsPaneListe);
 		jsPaneListe.setOpaque(false);
 		jsPaneListe.setBorder(null);
 		this.add(jsPaneListe);
